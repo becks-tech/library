@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto Mono', monospace;
+}
 .header {
     height: 10vh;
     background-color: aquamarine;
@@ -10,8 +17,18 @@
     background-color: beige;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    
+    gap: 1rem;
+    height: 85vh;
+    margin: 0 1rem 2rem 2rem;
 }
+
+.library-item {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border-left: 8px solid var(--cyan-10);
+}
+
 .remove-btn {
     position: relative;;
     left: 8rem;
@@ -23,7 +40,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(138, 183, 216, 0.5);
+    background: rgba(85, 162, 218, 0.5);
     display: grid;
     place-items: center;
     transition: all 0.3s linear;
@@ -38,8 +55,8 @@
   .modal-container {
     background: white;
     border-radius: 0.5rem;
-    width: 90vw;
-    height: 30vh;
+    width: 70vw;
+    height: 90vh;
     max-width: 620px;
     text-align: center;
     display: grid;
@@ -64,7 +81,7 @@
 
 form, .input-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     justify-content: center;
 }
 
@@ -87,8 +104,8 @@ form, .input-container {
     position: absolute;
     top: 0;
     left:0;
-    padding: 10px 0;
-    font-size: 1rem;
+    padding: 5px 0;
+    font-size: 1.75rem;
     pointer-events: none;
     transition: 0.5s;
 }
@@ -97,7 +114,7 @@ form, .input-container {
     top: -30px;
     left: 0;
     color: rebeccapurple;
-    font-size: 1rem;
+    font-size: 1.25rem;
 }
 .form-container .input-container input:focus {
     border: 2px solid rebeccapurple;
@@ -116,4 +133,11 @@ form, .input-container {
 
 .form {
     border-bottom: 2px dashed rebeccapurple;
+}
+input[type="checkbox"] {
+    height: 13rem;
+}
+
+footer {
+    height: 5vh;
 }

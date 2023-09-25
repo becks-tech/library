@@ -1,8 +1,9 @@
 const container = document.querySelector('.container');
 const addBtn = document.querySelector('.add-btn')
-//const title = document.querySelector()
-//const author = document.querySelector()
-//const pages = document.querySelector()
+const title = document.querySelector('#title').value
+const author = document.querySelector('#author').value
+const pages = document.querySelector('#pages').value
+const submit = document.querySelector('.submit-btn')
 const readStatus = document.querySelector('.read-status')
 const myLibrary = []
 const modal = document.querySelector('.modal-btn');
@@ -16,8 +17,10 @@ function Book(title, author, pages) {
 }
 
 function addBookToLibrary() {
+    
+    
     // Take user input and generate an ID based on the length of the list, dynamically change the ids when an item is removed
-    const book = new Book('The Hobbit', 'J.R.R. Tolkien', 295)
+    const book = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'read')
 
 
     // Initialise Read constructor
@@ -28,15 +31,38 @@ function addBookToLibrary() {
     }
     // if checkbox checked then  call this function, update array
     const book2 = new Read('I, Robot', 'Isaac Asimov', 245, 'read')
-    console.log(this.read)
+    const book3 = new Read('A Game of Thrones', 'George R.R. Martin', 694, 'read')
+    const book4 = new Read('I, Robot', 'Isaac Asimov', 245)
+    //console.log(this.read)
     if(this.read === 'undefined'){
         readStatus.textContent = 'unread'
     }
+   // const userBook = new Read
+   
 
     myLibrary.push(book)
     myLibrary.push(book2)
+    myLibrary.push(book3)
+    myLibrary.push(book4)
 
     //console.log(myLibrary)
+    submit.addEventListener('click', (e) => {
+        //myLibrary.push(userInput)
+        console.log(title)
+        console.log(author)
+        console.log(pages)
+        e.preventDefault();
+        
+        if(readStatus.checked){
+            const userBookRead = new Read(`${title}`, `${author}`, `${pages}`, `Read`)
+            console.log('checked')
+            myLibrary.push(userBookRead)
+        } else {
+            const userBook = new Book(`${title}`, `${author}`, `${pages}`)
+            myLibrary.push(userBook)
+        }
+        console.log(myLibrary)
+    })
 }
 
 addBookToLibrary()
@@ -52,7 +78,7 @@ function displayLibraryItems(libraryItems) {
                 <h2>${item.title}</h2>
                 <h3>${item.author}</h3>
                 <p>Number of Pages: ${item.pages}</p>
-                <!--<p class="read-status">${item.read}</p>-->
+                <p class="read-status">${item.read}</p>
             </article>`
     })
     displayItems = displayItems.join('');
