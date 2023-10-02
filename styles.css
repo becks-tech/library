@@ -5,7 +5,16 @@
     box-sizing: border-box;
     font-family: 'Roboto Mono', monospace;
 }
+main {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 4px;
+}
+button {
+    cursor: pointer;
+}
 .header {
+    grid-column: 1 / 3;
     height: 10vh;
     background-color: aquamarine;
     display: flex;
@@ -17,21 +26,33 @@
     background-color: beige;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    min-height: 85vh;
     gap: 1rem;
-    height: 85vh;
-    margin: 0 1rem 2rem 2rem;
+    padding: 1rem 1rem 0 1rem;
 }
 
 .library-item {
     background-color: #fff;
     border-radius: 10px;
     padding: 1.5rem;
-    border-left: 8px solid var(--cyan-10);
+    border-left: 8px solid darkcyan;
+    height: 400px;
 }
 
 .remove-btn {
-    position: relative;;
-    left: 8rem;
+    float: right;
+    padding: 0.25rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #e9e9e9;
+}
+
+.remove-btn:hover {
+    background-color: #b8b8b8;
+}
+
+.book-info {
+    margin-top: 2rem;
 }
 
 .modal-overlay {
@@ -139,5 +160,10 @@ input[type="checkbox"] {
 }
 
 footer {
+    background-color: rgba(80, 236, 229, 0.589);
     height: 5vh;
+    grid-column: 1 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
