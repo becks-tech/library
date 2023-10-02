@@ -16,7 +16,7 @@ function Book(title, author, pages) {
 
 function dummyBooks() {
     const book = new Book('The Hobbit', 'J.R.R. Tolkien', 295)
-    const book2 = new Book('I, Robot', 'Isaac Asimov', 245, 'read')
+    const book2 = new Book('I, Robot', 'Isaac Asimov', 245)
 
     myLibrary.push(book)
     myLibrary.push(book2)
@@ -28,16 +28,21 @@ function addBookToLibrary() {
         let title = document.querySelector('#title').value
         let author = document.querySelector('#author').value
         let pages = document.querySelector('#pages').value
-        confirm.textContent = 'Book added'
+        
         const userBook = new Book(`${title}`, `${author}`, `${pages}`)
         myLibrary.push(userBook)
         console.log(myLibrary)
+        displayLibraryItems(myLibrary)
     // Take user input and generate an ID based on the length of the list, dynamically change the ids when an item is removed
 }
 
 submit.addEventListener('click', (e) => {
     e.preventDefault();
     addBookToLibrary()
+    confirm.textContent = 'Book added'
+    close.addEventListener('click', ()=>{
+        overlay.classList.remove('open-modal')
+    })
 })
 
 
