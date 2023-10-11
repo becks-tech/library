@@ -2,17 +2,22 @@ const container = document.querySelector('.container');
 const addBtn = document.querySelector('.add-btn')
 const submit = document.querySelector('.submit-btn')
 const readStatus = document.querySelector('.read-status')
+const isRead = document.querySelector('.is-read')
 const myLibrary = []
 const modal = document.querySelector('.modal-btn');
 const close = document.querySelector('.close-btn');
 const overlay = document.querySelector('.modal-overlay');
 const confirm = document.querySelector('.confirmation');
 const removeBtns = document.querySelectorAll('.remove-btn')
+const inputs = document.querySelectorAll('input')
+const errors = document.querySelectorAll('.error')
+
 
 function Book(title, author, pages) {
     this.title = title
     this.author = author
     this.pages = pages
+
 }
 
 function dummyBooks() {
@@ -42,11 +47,14 @@ function addBookToLibrary() {
                 <h2>${title}</h2>
                 <h3>${author}</h3>
                 <p>Number of Pages: ${pages}</p>
+                <input type="checkbox" class="read-status">
+                <label for="title">Read</label>
+                <p class="is-read"></p>
                 </div>`
         container.appendChild(libraryItem)
         const removeBtn = libraryItem.getElementsByClassName('remove-btn')[0];
- removeBtn.addEventListener('click', () => {
-    container.removeChild(libraryItem)
+        removeBtn.addEventListener('click', () => {
+        container.removeChild(libraryItem)
  })
         //displayLibraryItems(myLibrary)
     // Take user input and generate an ID based on the length of the list, dynamically change the ids when an item is removed
@@ -79,24 +87,46 @@ addBtn.addEventListener('click', ()=>{
 close.addEventListener('click', ()=>{
     overlay.classList.remove('open-modal')
 })
-/*
+
 
 // Toggle read
-    // Initialise Read constructor
-    function Read(title, author, pages, read) {
-        Book.call(this, title, author, pages)
-        // Add read property
-        this.read = read
-    }
-    // if checkbox checked then  call this function, update array
-    const book2 = new Read('I, Robot', 'Isaac Asimov', 245, 'read')
-    const book3 = new Read('A Game of Thrones', 'George R.R. Martin', 694, 'read')
-    const book4 = new Read('I, Robot', 'Isaac Asimov', 245)
-    //console.log(this.read)
-    if(this.read === 'undefined'){
-        readStatus.textContent = 'unread'
-    }
-   // const userBook = new Read
-   */
 
-   // Form validation
+Book.prototype.read = false
+if(readStatus.checked){
+    isRead.textContent = 'Read'
+    Book.prototype.read = true
+}
+//isRead.textContent = 'Unread'
+
+// Disable sumbit button unless all require fields have been filled
+
+// Form validation
+
+submit.addEventListener('click', () => {
+    inputs.forEach((input)=>{
+        if (input.value === '') {
+            input.style.border = '2px solid red';
+            input.style.borderRadius = '5px';
+            errors.forEach((error)=>{
+                //error.textContent = 'This is a required field';
+                error.style.color = 'red';
+                error.style.visibility = 'visible'
+            })
+        }
+        else if(input.value !== '') {
+            inputs.forEach((input) => {
+                input.addEventListener('keypress', ()=>{
+                    input.style.border = '2px solid green';
+                    input.style.borderRadius = '5px';
+                    errors.forEach((error)=>{
+                        //error.textContent = 'This is a required field';
+                        error.style.color = 'red';
+                        error.style.visibility = 'hidden'
+                        confirm.textContent = 'Book added'
+                    })
+                })
+            })
+            
+        }
+    })
+})
