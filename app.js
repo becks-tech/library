@@ -6,7 +6,8 @@ const myLibrary = []
 const modal = document.querySelector('.modal-btn');
 const close = document.querySelector('.close-btn');
 const overlay = document.querySelector('.modal-overlay');
-const confirm = document.querySelector('.confirmation')
+const confirm = document.querySelector('.confirmation');
+const removeBtns = document.querySelectorAll('.remove-btn')
 
 function Book(title, author, pages) {
     this.title = title
@@ -20,9 +21,11 @@ function dummyBooks() {
 
     myLibrary.push(book)
     myLibrary.push(book2)
+
+
 }
 
-dummyBooks()
+
 
 function addBookToLibrary() {
         let title = document.querySelector('#title').value
@@ -32,7 +35,20 @@ function addBookToLibrary() {
         const userBook = new Book(`${title}`, `${author}`, `${pages}`)
         myLibrary.push(userBook)
         console.log(myLibrary)
-        displayLibraryItems(myLibrary)
+        const libraryItem = document.createElement('div');
+        libraryItem.setAttribute('class','library-item')
+        libraryItem.innerHTML = `<button class="remove-btn">X</button>
+        <div class="book-info">
+                <h2>${title}</h2>
+                <h3>${author}</h3>
+                <p>Number of Pages: ${pages}</p>
+                </div>`
+        container.appendChild(libraryItem)
+        const removeBtn = libraryItem.getElementsByClassName('remove-btn')[0];
+ removeBtn.addEventListener('click', () => {
+    container.removeChild(libraryItem)
+ })
+        //displayLibraryItems(myLibrary)
     // Take user input and generate an ID based on the length of the list, dynamically change the ids when an item is removed
 }
 
@@ -45,34 +61,14 @@ submit.addEventListener('click', (e) => {
     })
 })
 
-
-window.addEventListener('DOMContentLoaded', () => {
-    displayLibraryItems(myLibrary)
-})
-
-function displayLibraryItems(libraryItems) {
-    let displayItems = libraryItems.map((item) => {
-        return `<article class="library-item">
-        <button class="remove-btn">X</button>
-        <div class="book-info">
-                <h2>${item.title}</h2>
-                <h3>${item.author}</h3>
-                <p>Number of Pages: ${item.pages}</p>
-                <!--<p class="read-status">${item.read}</p>
-                toggle-read input and label--->
-                </div>
-            </article>`
-    })
-    displayItems = displayItems.join('');
-    container.innerHTML = displayItems
-}
-
 // Function to filter books - all, read, unread - if no books then display message
 
 // ID each item in array
-myLibrary.forEach((item, i) => {
-    item.id = i + 1;
-})
+
+
+//const lastItem = myLibrary.length
+
+//console.log(lastItem)
 
 // Modal
 
