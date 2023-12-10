@@ -16,11 +16,25 @@ button {
 .header {
     grid-column: 1 / 3;
     height: 10vh;
-    background-color: aquamarine;
+    background-color: rgb(8, 70, 49);
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    color: #b5bebc;
+    padding: 0 1rem 0 1rem;
+}
+.header button {
+    font-size: inherit;
+    background-color: inherit;
+    color: inherit;
+    border: 2px solid #b5bebc;
+    padding: 0.3rem;
+    border-radius: 10px;
+}
+.header button:hover {
+    background-color: #b5bebc;
+    color: rgb(8, 70, 49);
+    transition: ease-in-out 0.3s;
 }
 .container {
     background-color: beige;
@@ -37,8 +51,8 @@ button {
     padding: 1.5rem;
     border-left: 8px solid darkcyan;
     height: 400px;
+    width: 400px;
 }
-
 .remove-btn {
     float: right;
     padding: 0.25rem 1rem;

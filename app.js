@@ -60,14 +60,6 @@ function addBookToLibrary() {
     // Take user input and generate an ID based on the length of the list, dynamically change the ids when an item is removed
 }
 
-submit.addEventListener('click', (e) => {
-    e.preventDefault();
-    addBookToLibrary()
-    confirm.textContent = 'Book added'
-    close.addEventListener('click', ()=>{
-        overlay.classList.remove('open-modal')
-    })
-})
 
 // Function to filter books - all, read, unread - if no books then display message
 
@@ -99,14 +91,26 @@ if(readStatus.checked){
 //isRead.textContent = 'Unread'
 
 // Disable sumbit button unless all require fields have been filled
+const disableButton = () => {
+    inputs.forEach((input)=>{
+        if(input === '') {
+            submit.disabled = true
+        }
+    })
+    
+}
 
+disableButton()
 // Form validation
 
-submit.addEventListener('click', () => {
+submit.addEventListener('click', (e) => {
+    e.preventDefault();
+    addBookToLibrary()
     inputs.forEach((input)=>{
         if (input.value === '') {
             input.style.border = '2px solid red';
             input.style.borderRadius = '5px';
+            confirm.textContent = ''
             errors.forEach((error)=>{
                 //error.textContent = 'This is a required field';
                 error.style.color = 'red';
@@ -122,11 +126,11 @@ submit.addEventListener('click', () => {
                         //error.textContent = 'This is a required field';
                         error.style.color = 'red';
                         error.style.visibility = 'hidden'
-                        confirm.textContent = 'Book added'
+                        
+                        
                     })
                 })
             })
-            
         }
     })
 })
